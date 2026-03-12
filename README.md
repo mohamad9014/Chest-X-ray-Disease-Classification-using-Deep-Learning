@@ -116,7 +116,7 @@ The following metrics were computed for each disease class:
 
 These metrics help assess the diagnostic capability of the model in identifying chest diseases from X-ray images.
 
-![final evaluation](Results/final_evaluation.png)
+![final_evaluation](Results/final_evaluation.png)
 
 ## Calibration Analysis
 
@@ -127,6 +127,7 @@ Calibration curves compare predicted probabilities with the actual fraction of p
 Well-calibrated models are particularly important in clinical applications where probability estimates may influence medical decisions.
 ![callibration_curve](Results/callibration_curve.png)
 
+## Precision - Recall curve
 ![precision_recall_curve](Results/precision_recall_curve.png)
 
 
