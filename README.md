@@ -76,11 +76,11 @@ Install required libraries:
 pip install -r requirements.txt
 ## Example Results
 
-![ROC Curve](results/roc_curve.png)
+![ROC Curve](Results/roc_curve.png)
 
-![GradCAM Example](results/gradcam_example1.png)
+![GradCAM Example](Results/gradcam_example1.png)
 
-![GradCAM Example](results/gradcam_example2.png)
+![GradCAM Example](Results/gradcam_example2.png)
 
-![Class Frequency](results/frequency_of_classes.png)  
+![Class Frequency](Results/frequency_of_classes.png)  
 
