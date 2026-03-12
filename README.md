@@ -74,3 +74,10 @@ You can either train the model from scratch or use any DenseNet pretrained weigh
 
 Install required libraries:
 pip install -r requirements.txt
+
+## Example Results
+![ROC Curve](results/roc_curve.png)
+![GradCAM Example](results/gradcam_example1.png)
+![GradCAM Example](results/gradcam_example2.png)
+![GradCAM Example](results/frequency_of_classes.png)
+
