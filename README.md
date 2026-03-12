@@ -116,7 +116,7 @@ The following metrics were computed for each disease class:
 
 These metrics help assess the diagnostic capability of the model in identifying chest diseases from X-ray images.
 
-![final_evaluation](Results/final_evaluation.png)
+![final_evaluation](Results/final_evaluation.PNG)
 
 ## Calibration Analysis
 
