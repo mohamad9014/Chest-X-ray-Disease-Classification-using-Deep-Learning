@@ -3,8 +3,8 @@ import random
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-from keras import backend as K
-from keras.preprocessing import image
+from tensorflow.keras import backend as K
+from tensorflow.keras.preprocessing import image
 from sklearn.metrics import roc_auc_score, roc_curve
 from tensorflow.compat.v1.logging import INFO, set_verbosity
 import os
@@ -39,24 +39,33 @@ def load_image(img, image_dir, df, preprocess=True, H=320, W=320):
 
 
 def grad_cam(input_model, image, cls, layer_name, H=320, W=320):
-    """GradCAM method for visualizing input saliency."""
-    y_c = input_model.output[0, cls]
-    conv_output = input_model.get_layer(layer_name).output
-    grads = K.gradients(y_c, conv_output)[0]
+    import tensorflow as tf
 
-    gradient_function = K.function([input_model.input], [conv_output, grads])
+    grad_model = tf.keras.models.Model(
+        [input_model.inputs],
+        [input_model.get_layer(layer_name).output, input_model.output]
+    )
 
-    output, grads_val = gradient_function([image])
-    output, grads_val = output[0, :], grads_val[0, :, :, :]
+    with tf.GradientTape() as tape:
+        conv_outputs, predictions = grad_model(image)
+        loss = predictions[:, cls]
 
-    weights = np.mean(grads_val, axis=(0, 1))
-    cam = np.dot(output, weights)
+    grads = tape.gradient(loss, conv_outputs)
 
-    # Process CAM
-    cam = cv2.resize(cam, (W, H), cv2.INTER_LINEAR)
-    cam = np.maximum(cam, 0)
-    cam = cam / cam.max()
-    return cam
+    pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
+
+    conv_outputs = conv_outputs[0]
+    heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]
+    heatmap = tf.squeeze(heatmap)
+
+    heatmap = np.maximum(heatmap, 0)
+
+    if np.max(heatmap) != 0:
+        heatmap /= np.max(heatmap)
+
+    heatmap = cv2.resize(heatmap, (W, H), cv2.INTER_LINEAR)
+
+    return heatmap
 
 
 def compute_gradcam(model, img, image_dir, df, labels, selected_labels,
