@@ -36,11 +36,11 @@ Scikit-learn
 Chest-X-ray-Disease-Classification-using-Deep-Learning/
 
 
-├── data/               # CSV files for train/validation/test splits
+├── data/               # CSV files for train/validation/test splits and eval for avaluation CSV files 
 
 ├── notebooks/          # Main notebook or Python script for the project
 
-├── src/                # Utility functions
+├── src/                # Utility functions ( util is used for chest_xray_diagnosis.py   and utils is used for evaluation.py )
 
 ├── Results/            # Example output figures
 
@@ -100,4 +100,50 @@ pip install -r requirements.txt
 ![GradCAM Example](Results/gradcam_example2.png)
 
 ![Class Frequency](Results/frequency_of_classes.png)  
+
+## Model Evaluation
+
+After training the DenseNet-based model, predictions were evaluated using clinically relevant metrics commonly used in medical AI.
+
+The following metrics were computed for each disease class:
+
+- ROC-AUC (Area Under the Receiver Operating Characteristic Curve)
+- Sensitivity (Recall)
+- Specificity
+- Positive Predictive Value (PPV)
+- Negative Predictive Value (NPV)
+- F1-score
+
+These metrics help assess the diagnostic capability of the model in identifying chest diseases from X-ray images.
+
+![final evaluation](Results/final_evaluation.png)
+
+## Calibration Analysis
+
+To analyze the reliability of the predicted probabilities, calibration curves were generated for each disease class.
+
+Calibration curves compare predicted probabilities with the actual fraction of positive cases, allowing us to evaluate whether the model is overconfident or underconfident in its predictions.
+
+Well-calibrated models are particularly important in clinical applications where probability estimates may influence medical decisions.
+![callibration_curve](Results/callibration_curve.png)
+
+![precision_recall_curve](Results/precision_recall_curve.png)
+
+
+
+
+## Note on CSV Files
+
+This repository combines two related parts of a deep learning pipeline developed during the course project.
+
+The CSV files used in the repository come from different stages of the workflow:
+
+- `train_small.csv`, `valid_small.csv`, and `test.csv` contain metadata used for training and validation of the chest X-ray classification model.
+
+- Prediction CSV files (e.g., `train_pred.csv`, `valid_pred.csv`) contain model output probabilities that are used for performance evaluation and analysis.
+
+Since these files originate from different steps of the pipeline (training vs. evaluation), the datasets and structures are not identical. This separation helps keep the training data and the evaluation results clearly organized.
+
+
+
 
