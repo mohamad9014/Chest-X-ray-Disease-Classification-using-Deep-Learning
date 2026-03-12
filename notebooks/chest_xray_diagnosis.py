@@ -150,9 +150,9 @@ def get_weighted_loss(pos_weights, neg_weights, epsilon=1e-7):
     return weighted_loss
 
 
-train_df = pd.read_csv("data/nih/train-small.csv")
-valid_df = pd.read_csv("data/nih/valid-small.csv")
-test_df = pd.read_csv("data/nih/test.csv")
+train_df = pd.read_csv("data/train-small.csv")
+valid_df = pd.read_csv("data/valid-small.csv")
+test_df = pd.read_csv("data/test.csv")
 
 print("Leakage between train and valid:", check_for_leakage(train_df, valid_df, "PatientId"))
 print("Leakage between train and test:", check_for_leakage(train_df, test_df, "PatientId"))
@@ -206,7 +206,7 @@ plt.xticks(rotation=90)
 sns.barplot(x="Class", y="Value", hue="Label", data=data)
 plt.show()
 
-base_model = DenseNet121(weights="models/nih/densenet.hdf5", include_top=False)
+base_model = DenseNet121(weights="models/densenet.hdf5", include_top=False)
 
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
@@ -215,13 +215,13 @@ predictions = Dense(len(labels), activation="sigmoid")(x)
 model = Model(inputs=base_model.input, outputs=predictions)
 model.compile(optimizer="adam", loss=get_weighted_loss(pos_weights, neg_weights))
 
-model.load_weights("models/nih/pretrained_model.h5")
+model.load_weights("models/pretrained_model.h5")
 
 predicted_vals = model.predict(test_generator, steps=len(test_generator))
 auc_rocs = util.get_roc_curve(labels, predicted_vals, test_generator)
 
-df = pd.read_csv("data/nih/train-small.csv")
-IMAGE_DIR = "data/nih/images-small/"
+df = pd.read_csv("data/train-small.csv")
+IMAGE_DIR = "data/images-small/"
 
 labels_to_show = np.take(labels, np.argsort(auc_rocs)[::-1])[:4]
 
