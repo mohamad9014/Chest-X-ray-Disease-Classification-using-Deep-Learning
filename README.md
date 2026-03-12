@@ -35,11 +35,17 @@ Scikit-learn
 
 Chest-X-ray-Disease-Classification-using-Deep-Learning/
 ├── data/               # CSV files for train/validation/test splits
+
 ├── notebooks/          # Main notebook or Python script for the project
+
 ├── src/                # Utility functions
+
 ├── Results/            # Example output figures
+
 ├── requirements.txt    # Project dependencies
+
 └── README.md           # Project documentation
+
 
 ---
 ## Dataset
