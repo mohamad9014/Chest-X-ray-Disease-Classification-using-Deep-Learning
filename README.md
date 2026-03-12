@@ -82,5 +82,5 @@ pip install -r requirements.txt
 
 ![GradCAM Example](Results/gradcam_example2.png)
 
-![Class Frequency](Results/frequency_of_classes.png)  
+![Class Frequency](Results/frequency of classes.png)  
 
