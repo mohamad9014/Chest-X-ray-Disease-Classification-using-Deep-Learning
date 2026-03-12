@@ -1,6 +1,6 @@
 # Chest-X-ray-Disease-Classification-using-Deep-Learning
 Deep learning project for multi-label chest X-ray disease classification using DenseNet and Grad-CAM visualization.
-# AI Chest X-ray Diagnosis
+
 
 This project explores the use of deep learning for multi-label classification of chest X-ray images.  
 A pretrained DenseNet model is used to predict multiple thoracic diseases from X-ray images.
