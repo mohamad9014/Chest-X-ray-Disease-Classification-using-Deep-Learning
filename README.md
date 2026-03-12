@@ -33,6 +33,13 @@ Scikit-learn
 
 ## Project Structure
 
+Chest-X-ray-Disease-Classification-using-Deep-Learning/
+├── data/               # CSV files for train/validation/test splits
+├── notebooks/          # Main notebook or Python script for the project
+├── src/                # Utility functions
+├── Results/            # Example output figures
+├── requirements.txt    # Project dependencies
+└── README.md           # Project documentation
 
 ---
 ## Dataset
@@ -73,7 +80,9 @@ You can either train the model from scratch or use any DenseNet pretrained weigh
 ## Installation
 
 Install required libraries:
+
 pip install -r requirements.txt
+
 ## Example Results
 
 ![ROC Curve](Results/roc_curve.png)
